@@ -22,7 +22,7 @@ function makeRequest(url, method = 'GET', requestData, requestOptions = {}) {
             });
 
             response.on('end', () => {
-                const stringData = $$.Buffer.concat(data).toString();
+                const stringData = Buffer.concat(data).toString();
 
                 return resolve({
                     statusCode: response.statusCode,

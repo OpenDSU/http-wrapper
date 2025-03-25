@@ -1,7 +1,7 @@
 const MiddlewareRegistry = require('./MiddlewareRegistry');
 const http = require('http');
 const https = require('https');
-
+const {promisify} = require('../../utils');
 
 function Server(sslOptions) {
     const middleware = new MiddlewareRegistry();
@@ -95,7 +95,7 @@ function Server(sslOptions) {
 
             response.on('end', () => {
                 try {
-                    const bodyContent = $$.Buffer.concat(data).toString();
+                    const bodyContent = Buffer.concat(data).toString();
                     //console.log('resolve will be called. bodyContent received : ', bodyContent);
                     return callback(undefined, bodyContent);
                 } catch (err) {
@@ -116,7 +116,7 @@ function Server(sslOptions) {
 
     this.makeLocalRequestAsync = async function (method, path, body, headers) {
         try {
-            const makeLocalRequest = $$.promisify(this.makeLocalRequest.bind(this));
+            const makeLocalRequest = promisify(this.makeLocalRequest.bind(this));
             let response = await makeLocalRequest(method, path, body, headers);
 
             if (response) {

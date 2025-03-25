@@ -1,5 +1,3 @@
-const logger = $$.getLogger("http-wrapper", "apihub/libs");
-
 function setDataHandler(request, callback) {
     let bodyContent = '';
 
@@ -26,7 +24,7 @@ function setDataHandlerMiddleware(request, response, next) {
 }
 
 function sendErrorResponse(error, response, statusCode) {
-    logger.error(error);
+    console.error(error);
     response.statusCode = statusCode;
     response.end();
 }

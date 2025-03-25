@@ -1,5 +1,4 @@
 const querystring = require('querystring');
-const logger = $$.getLogger("http-wrapper", "apihub/libs");
 
 function matchUrl(pattern, url) {
     const result = {
@@ -118,7 +117,7 @@ function MiddlewareRegistry() {
         try {
             execute(0, req.method.toLowerCase(), req.url, req, res);
         } catch (e) {
-            logger.error(e);
+            console.error(e);
             res.statusCode = 500;
             res.end("Internal server error");
         }
@@ -134,7 +133,7 @@ function MiddlewareRegistry() {
     function execute(index, method, url, ...params) {
         if (!registeredMiddlewareFunctions[index]) {
             if (index === 0) {
-                logger.error("No handlers registered yet!");
+                console.error("No handlers registered yet!");
             }
             return;
         }
@@ -167,12 +166,12 @@ function MiddlewareRegistry() {
         fn(...params, (err) => {
             counter++;
             if (counter > 1) {
-                logger.warn('You called next multiple times, only the first one will be executed');
+                console.warn('You called next multiple times, only the first one will be executed');
                 return;
             }
 
             if (err) {
-                logger.error(err);
+                console.error(err);
                 return;
             }
 

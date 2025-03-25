@@ -22,7 +22,7 @@ const restoreFileFromBackup = (backupServiceUrl, filePath, callback) => {
             return;
         }
         let fileContent = await response.arrayBuffer();
-        fileContent = $$.Buffer.from(fileContent);
+        fileContent = Buffer.from(fileContent);
         fs.mkdirSync(path.dirname(filePath), {recursive: true});
         fs.writeFile(filePath, fileContent, callback);
     }).catch((err) => {

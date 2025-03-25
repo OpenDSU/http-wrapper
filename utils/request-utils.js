@@ -1,5 +1,3 @@
-const logger = $$.getLogger("request-utils", "apihub/utils");
-
 function getCurrentApiHubUrl(server) {
     const config = require("../config");
     const currentApiHubUrl = `${server.protocol}://${config.getConfig("host")}:${config.getConfig("port")}`;
@@ -41,7 +39,7 @@ async function getLocalBdnsEntryListExcludingSelfAsync(request, domain, entryNam
         const entriesUrl = `/contracts/${domain}/bdns-entries/anchoringServices`;
         entries = await server.makeLocalRequestAsync("GET", entriesUrl);
     } catch (error) {
-        logger.info(code, `[${entryName}] Failed to call contract to get ${entryName}. Falling back to local bdns check`);
+        console.info(code, `[${entryName}] Failed to call contract to get ${entryName}. Falling back to local bdns check`);
 
         try {
             const bdnsUrl = `/bdns`;
@@ -50,7 +48,7 @@ async function getLocalBdnsEntryListExcludingSelfAsync(request, domain, entryNam
                 entries = bdns[domain][entryName];
             }
         } catch (error) {
-            logger.info(code, `[${entryName}] Failed to call BDNS to get ${entryName}`);
+            console.info(code, `[${entryName}] Failed to call BDNS to get ${entryName}`);
         }
     }
 

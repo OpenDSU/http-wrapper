@@ -73,8 +73,8 @@ function bodyContentLength(request) {
         return;
     }
 
-    if (typeof request.body !== "undefined" && request.body.constructor.name in ['String', '$$.Buffer', 'ArrayBuffer']) {
-        request.options.headers['Content-Length'] = $$.Buffer.byteLength(request.body);
+    if (typeof request.body !== "undefined" && request.body.constructor.name in ['String', 'Buffer', 'ArrayBuffer']) {
+        request.options.headers['Content-Length'] = Buffer.byteLength(request.body);
     }
 }
 
@@ -201,12 +201,10 @@ function parametersPreProcessing(params) {
     return res;
 }
 
-const logger = $$.getLogger("Client", "apihub/http-wrapper");
-
 const handler = {
     get(target, propName) {
         if (!target[propName]) {
-            logger.error(propName, "Not implemented!");
+            console.error(propName, "Not implemented!");
         } else {
             return function () {
                 const args = parametersPreProcessing(arguments);

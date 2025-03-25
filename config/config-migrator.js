@@ -1,5 +1,3 @@
-const logger = $$.getLogger("config-migrator", "apihub/config");
-
 function removeConfigComponent(config) {
     if (config.componentsConfig && config.componentsConfig.config) {
         delete config.componentsConfig.config;
@@ -136,7 +134,7 @@ function migrate(oldConfig, configFolderPath) {
     const path = require("path");
     const fs = require("fs");
     const apihubJsonConfigPath = path.join(configFolderPath, "apihub.json");
-    logger.debug(`Generating apihub.json config file at ${apihubJsonConfigPath}...`);
+    console.debug(`Generating apihub.json config file at ${apihubJsonConfigPath}...`);
 
     if (!fs.existsSync(configFolderPath)) {
         fs.mkdirSync(configFolderPath, {recursive: true});
@@ -151,7 +149,7 @@ function migrate(oldConfig, configFolderPath) {
     Object.keys(domainConfigs).forEach((domain) => {
         const domainConfig = domainConfigs[domain];
         const domainConfigPath = path.join(domainConfigsFolderPath, `${domain}.json`);
-        logger.debug(`Generating config file for domain '${domain}' at ${domainConfigPath}...`);
+        console.debug(`Generating config file for domain '${domain}' at ${domainConfigPath}...`);
         fs.writeFileSync(domainConfigPath, JSON.stringify(domainConfig, null, 2));
     });
 

@@ -68,7 +68,7 @@ const defaultConfig = {
             "module": "./components/serverlessAPIProxy"
         },
         "webhook": {
-            "module": "./components/webhook"
+            "module": "./components/internalWebhook"
         },
         "requestLogger": {
             "comment": "this is a standard middleware but its config is here to make it as uniform as possible",

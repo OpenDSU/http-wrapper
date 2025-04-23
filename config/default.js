@@ -7,7 +7,7 @@ const defaultConfig = {
     "zeromqForwardAddress": "tcp://127.0.0.1:5001",
     "preventRateLimit": false,
     // staticServer needs to load last
-    "activeComponents": ["config", "mq", "secrets", "notifications", "bdns", "bricking", "anchoring", 'debugLogger', "mainDSU", "versionlessDSU", "stream", "lightDBEnclave", "webhook", "proxy", "staticServer"],
+    "activeComponents": ["config", "mq", "secrets", "notifications", "bdns", "bricking", "anchoring", 'debugLogger', "mainDSU", "versionlessDSU", "stream", "lightDBEnclave", "internalWebhook", "externalWebhook", "proxy", "staticServer"],
     "componentsConfig": {
         "mq": {
             "module": "./components/mqHub",
@@ -67,8 +67,11 @@ const defaultConfig = {
         "proxy": {
             "module": "./components/serverlessAPIProxy"
         },
-        "webhook": {
+        "internalWebhook": {
             "module": "./components/internalWebhook"
+        },
+        "externalWebhook": {
+            "module": "./components/externalWebhook"
         },
         "requestLogger": {
             "comment": "this is a standard middleware but its config is here to make it as uniform as possible",
